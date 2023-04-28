@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.images.append(sprite)
         self.images.append(pygame.transform.flip(sprite, flip_x=True, flip_y=False))
         self.image = self.images[0]
-        self.speed = 5  # Define the player's speed
+        self.speed = 14  # Define the player's speed
         self.rect = self.image.get_rect()
 
     def update(self, keys):
@@ -83,28 +83,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.FINGERDOWN or event.type == pygame.FINGERUP or event.type == pygame.FINGERMOTION:
-            for touch in event.touches:
-                touch_x, touch_y = touch.position
-
-                # Map touch coordinates to the screen coordinates
-                touch_x = touch_x * screen.get_width()
-                touch_y = touch_y * screen.get_height()
-
-                # Check for touch controls
-                if touch_x < screen.get_width() // 2:  # Left side of the screen
-                    keys[pygame.K_a] = True
-                    keys[pygame.K_d] = False
-                else:  # Right side of the screen
-                    keys[pygame.K_a] = False
-                    keys[pygame.K_d] = True
-
-                if touch_y < screen.get_height() // 2:  # Top half of the screen
-                    keys[pygame.K_w] = True
-                    keys[pygame.K_s] = False
-                else:  # Bottom half of the screen
-                    keys[pygame.K_w] = False
-                    keys[pygame.K_s] = True
 
     keys = pygame.key.get_pressed()  # Check the state of all keys
 
